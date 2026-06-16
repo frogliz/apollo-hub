@@ -10,7 +10,7 @@ const COL = 'runbooks';
 export async function getRunbooks(): Promise<Runbook[]> {
   const q = query(collection(db, COL), orderBy('titulo'));
   const snap = await getDocs(q);
-  return snap.docs.map(d => ({ id: d.id, ...d.data() } as Runbook));
+  return snap.docs.map((d) => ({ id: d.id, ...d.data() } as Runbook));
 }
 
 export async function getRunbook(id: string): Promise<Runbook | null> {

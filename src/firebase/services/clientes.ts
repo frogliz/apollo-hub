@@ -10,7 +10,7 @@ const COL = 'clientes';
 export async function getClientes(): Promise<Cliente[]> {
   const q = query(collection(db, COL), orderBy('razaoSocial'));
   const snap = await getDocs(q);
-  return snap.docs.map(d => ({ id: d.id, ...d.data() } as Cliente));
+  return snap.docs.map((d) => ({ id: d.id, ...d.data() } as Cliente));
 }
 
 export async function getCliente(id: string): Promise<Cliente | null> {

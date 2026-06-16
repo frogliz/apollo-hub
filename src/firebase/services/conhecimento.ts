@@ -10,7 +10,7 @@ const COL = 'conhecimento';
 export async function getConhecimentos(): Promise<Conhecimento[]> {
   const q = query(collection(db, COL), orderBy('criadoEm', 'desc'));
   const snap = await getDocs(q);
-  return snap.docs.map(d => ({ id: d.id, ...d.data() } as Conhecimento));
+  return snap.docs.map((d) => ({ id: d.id, ...d.data() } as Conhecimento));
 }
 
 export async function getConhecimento(id: string): Promise<Conhecimento | null> {
