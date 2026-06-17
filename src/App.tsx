@@ -10,6 +10,7 @@ import { Runbooks } from './pages/Runbooks';
 import { ModulosCarga } from './pages/ModulosCarga';
 import { Conhecimento } from './pages/Conhecimento';
 import { Cofre } from './pages/Cofre';
+import { DarCarga } from './pages/DarCarga';
 
 function PrivateRoute({ children }: { children: React.ReactNode }) {
   const { currentUser } = useAuth();
@@ -28,6 +29,7 @@ function AppRoutes() {
       <Route path="/carga" element={<PrivateRoute><ModulosCarga /></PrivateRoute>} />
       <Route path="/conhecimento" element={<PrivateRoute><Conhecimento /></PrivateRoute>} />
       <Route path="/cofre" element={<PrivateRoute><Cofre /></PrivateRoute>} />
+      <Route path="/dar-carga" element={<PrivateRoute><DarCarga /></PrivateRoute>} />
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );

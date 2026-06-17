@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import {
   LayoutDashboard, Users, BookOpen, Server, ShieldAlert,
-  KeyRound, LogOut, ChevronRight, Cpu
+  KeyRound, LogOut, ChevronRight, Cpu, Zap
 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import toast from 'react-hot-toast';
@@ -10,6 +10,7 @@ import toast from 'react-hot-toast';
 const navItems = [
   { path: '/', icon: LayoutDashboard, label: 'Dashboard' },
   { path: '/clientes', icon: Users, label: 'Clientes' },
+  { path: '/dar-carga', icon: Zap, label: 'Dar Carga', highlight: true },
   { path: '/runbooks', icon: BookOpen, label: 'Runbooks' },
   { path: '/carga', icon: Server, label: 'Módulos do Carga' },
   { path: '/conhecimento', icon: ShieldAlert, label: 'Base de Conhecimento' },
@@ -48,16 +49,18 @@ export function Sidebar() {
 
       <nav className="sidebar-nav">
         <div className="nav-section-label">Menu</div>
-        {navItems.map(({ path, icon: Icon, label }) => (
+        {navItems.map(({ path, icon: Icon, label, highlight }: any) => (
           <NavLink
             key={path}
             to={path}
             end={path === '/'}
             className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}
+            style={highlight ? { color: 'var(--yellow)', fontWeight: 700 } : {}}
           >
-            <Icon size={18} className="nav-item-icon" />
+            <Icon size={18} className="nav-item-icon" style={highlight ? { color: 'var(--yellow)' } : {}} />
             {label}
-            <ChevronRight size={14} style={{ marginLeft: 'auto', opacity: 0.3 }} />
+            {highlight && <span className="badge badge-yellow" style={{ fontSize: 9, marginLeft: 'auto', padding: '1px 6px' }}>AÇÃO</span>}
+            {!highlight && <ChevronRight size={14} style={{ marginLeft: 'auto', opacity: 0.3 }} />}
           </NavLink>
         ))}
       </nav>

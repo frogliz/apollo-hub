@@ -1,0 +1,12 @@
+{
+  "clienteId": "TROCAR_PELO_ID_DO_CLIENTE",
+  "clienteNome": "NOME DO CLIENTE",
+  "firebaseProjectId": "apollogs-a2a98",
+  "firebaseApiKey": "AIzaSyAfZrTPszsXuI0YfhqE1MxyZ6aTKL8yarI",
+  "plinkPath": "C:\\Program Files\\PuTTY\\plink.exe",
+  "serverAppPath": "C:\\ApolloSistemas\\ServerApp\\ServerApp.exe",
+  "oracleHost": "127.0.0.1",
+  "oracleUser": "oracle",
+  "oracleSenha": "ap0ll0",
+  "versao": "1.0"
+}
