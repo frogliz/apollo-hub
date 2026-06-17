@@ -1,0 +1,20 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Agent pode escrever sem autenticacao (roda como servico Windows)
+    match /agentes_status/{docId} {
+      allow read, write: if true;
+    }
+
+    // Comandos de carga - agent precisa ler/escrever sem auth
+    match /comandos_carga/{docId} {
+      allow read, write: if true;
+    }
+
+    // Resto exige login
+    match /{document=**} {
+      allow read, write: if request.auth != null;
+    }
+  }
+}
