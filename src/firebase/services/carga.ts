@@ -1,6 +1,6 @@
 import {
   collection, addDoc, onSnapshot, query, orderBy,
-  limit, serverTimestamp, doc, updateDoc, getDocs, where
+  limit, doc, deleteDoc, getDocs, where
 } from 'firebase/firestore';
 import { db } from '../config';
 
@@ -18,8 +18,17 @@ export interface ComandoCarga {
 
 export interface AgenteStatus {
   id?: string;
+  maquinaId?: string;
+  hostname?: string;
   clienteId: string;
   clienteNome: string;
+  so?: string;
+  ip_local?: string;
+  ip_publico?: string;
+  rdp_porta?: number;
+  interfaces?: string[];
+  processador?: string;
+  ram_gb?: number;
   online: boolean;
   cargaOnline: boolean;
   ultimaAtividade?: any;
@@ -41,7 +50,7 @@ export async function enviarComandoCarga(
     status: 'pending',
     log: 'Aguardando agent...',
     cargaOnline: false,
-    criadoEm: serverTimestamp(),
+    criadoEm: new Date().toISOString(),
     executadoEm: null,
   } as Omit<ComandoCarga, 'id'>);
   return ref.id;
@@ -69,6 +78,10 @@ export function ouvirStatusAgentes(
     const agentes = snap.docs.map((d) => ({ id: d.id, ...d.data() } as AgenteStatus));
     callback(agentes);
   });
+}
+
+export async function deletarAgente(id: string): Promise<void> {
+  await deleteDoc(doc(db, COL_AGENTES, id));
 }
 
 export async function getStatusAgente(clienteId: string): Promise<AgenteStatus | null> {
